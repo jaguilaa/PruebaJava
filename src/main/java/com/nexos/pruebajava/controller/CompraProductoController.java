@@ -5,7 +5,11 @@
  */
 package com.nexos.pruebajava.controller;
 
-import com.nexos.pruebajava.estructuradatos.TipoProductoEnum;
+import com.nexos.pruebajava.estructuradatos.Inventario;
+import com.nexos.pruebajava.estructuradatos.Producto;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,15 +21,57 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class CompraProductoController {
+public class CompraProductoController implements Serializable{
+    
     private String nombreProducto;
-    private TipoProductoEnum tipoProducto;
-    private double valorUnitario;
+    private String tipoProducto;
+    private double valorUnitarioCompra;
     private int cantidadComprada;
     private int cantidadDisponible;
     private double valorTotalComprado;
 
+    public CompraProductoController(){
+        
+    }
     
+    public void registrarCompraProducto(){
+        FacesContext context = FacesContext.getCurrentInstance();   
+        List<Inventario> inventarios =
+                (List<Inventario>) context.getExternalContext().getSessionMap().get("Inventarios")== null ? 
+                new ArrayList<Inventario>():
+                (List<Inventario>) context.getExternalContext().getSessionMap().get("Inventarios");
+        
+        Inventario inventario=null;
+        int index=0;
+        boolean encontroInventario=false;
+        for (Inventario inv:inventarios)
+        {
+            if(inv.getProducto().getNombreProducto().equals(nombreProducto) && inv.getProducto().getTipoProducto().equals(tipoProducto)){
+                inventario=inv;
+                encontroInventario=true;
+            }
+            if(!encontroInventario)
+                index++;
+        }
+        if(inventario==null)
+        {
+            Producto producto = new Producto(nombreProducto,tipoProducto);
+            inventario=new Inventario(cantidadComprada, valorUnitarioCompra, cantidadDisponible, valorTotalComprado);
+            inventario.setProducto(producto);
+            inventario.setCantidadDisponible(cantidadComprada);
+            inventario.setValorTotalComprado(valorUnitarioCompra*cantidadComprada);
+            inventarios.add(inventario);
+        }else{
+            inventario.setCantidadComprada(inventario.getCantidadComprada()+cantidadComprada);
+            inventario.setValorUnitarioCompra(valorUnitarioCompra);
+            inventario.setCantidadDisponible(inventario.getCantidadDisponible()+cantidadComprada);
+            inventario.setValorTotalComprado(inventario.getValorTotalComprado()+(valorUnitarioCompra*cantidadComprada));
+            inventarios.set(index, inventario);
+        }
+        
+        context.getExternalContext().getSessionMap().put("Inventarios", inventarios);
+        addMessage("Compra de producto registrada correctamente");
+    }
     
     public void addMessage(String mensaje){
         FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,mensaje,null);
@@ -48,29 +94,29 @@ public class CompraProductoController {
     /**
      * @return the tipoProducto
      */
-    public TipoProductoEnum getTipoProducto() {
+    public String getTipoProducto() {
         return tipoProducto;
     }
 
     /**
      * @param tipoProducto the tipoProducto to set
      */
-    public void setTipoProducto(TipoProductoEnum tipoProducto) {
+    public void setTipoProducto(String tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
 
     /**
      * @return the valorUnitario
      */
-    public double getValorUnitario() {
-        return valorUnitario;
+    public double getValorUnitarioCompra() {
+        return valorUnitarioCompra;
     }
 
     /**
-     * @param valorUnitario the valorUnitario to set
+     * @param valorUnitarioCompra the valorUnitario to set
      */
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
+    public void setValorUnitarioCompra(double valorUnitarioCompra) {
+        this.valorUnitarioCompra = valorUnitarioCompra;
     }
 
     /**

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registrar Venta</title>
+    </h:head>
+    <h:body>
+        <center><h1 style="color: #2E96E7">Registrar Venta Producto</h1></center><br/>
+        <div style="text-align: center;">
+            <div style="display: inline-block; text-align: left;">
+                <h:form id="compraProducto"> 
+                        <p:outputLabel>Nombre: </p:outputLabel> 
+                        <p:selectOneMenu placeholder="Nombre Producto" disabled="#{ventaProductoController.editable}" value="#{ventaProductoController.nombreProducto}" >
+                            <f:selectItem itemLabel="Seleccione Producto" itemValue="" />
+                            <f:selectItems value="#{ventaProductoController.productoNombres}" />
+                            <p:ajax update="selectTipo" event="itemSelect" listener="#{ventaProductoController.cargarTipos}"/>
+                        </p:selectOneMenu><br/>
+                        <p:outputLabel >Tipo Producto: </p:outputLabel>
+                        <p:selectOneMenu id="selectTipo" disabled="#{ventaProductoController.editable}" placeholder="Tipo Producto" value="#{ventaProductoController.tipoProducto}">
+                            <f:selectItem itemLabel="Seleccione Tipo" itemValue="" />
+                            <f:selectItems value="#{ventaProductoController.productoTipos}" />
+                        </p:selectOneMenu><br/>
+                        <p:outputLabel>Valor Unitario: </p:outputLabel> <p:inputNumber disabled="#{ventaProductoController.editable}" placeholder="Valor Unitario" value="#{ventaProductoController.valorUnitarioVenta}"></p:inputNumber><br/>
+                        <p:outputLabel>Cantidad Vendida: </p:outputLabel> <p:inputNumber disabled="#{ventaProductoController.editable}" placeholder="Cantidad Comprada" value="#{ventaProductoController.cantidadVendida}"></p:inputNumber><br/><br/> 
+                        <p:growl id="growl" life="2000"/>
+                        <center><p:commandButton id="registrarVentaButton" disabled="#{ventaProductoController.editable}" update="growl" action="#{ventaProductoController.registrarVentaProducto}" value="Registrar Venta" ></p:commandButton><br/>
+                        <p:commandButton  action="faces/index.xhtml" value="Regresar"/></center>
+                </h:form>  
+            </div>
+        </div>
+    </h:body>
+</html>
+

@@ -12,7 +12,8 @@ package com.nexos.pruebajava.estructuradatos;
 public class Inventario {
 
     private Producto producto;  
-    private double valorUnitario;
+    private double valorUnitarioCompra;
+    private double valorUnitarioVenta;
     private int cantidadVendida;
     private int cantidadComprada;
     private int cantidadDisponible;
@@ -21,6 +22,23 @@ public class Inventario {
     /**
      * @return the producto
      */
+    public Inventario(){   
+    }
+    
+    public Inventario(double valorUnitarioVenta,int cantidadVendida,int cantidadDisponible,double valorTotalVendido){   
+        this.valorUnitarioVenta=valorUnitarioVenta;
+        this.cantidadVendida=cantidadVendida;
+        this.cantidadDisponible=cantidadDisponible;
+        this.valorTotalVendido=valorTotalVendido;
+    }
+    
+    public Inventario(int cantidadComprada,double valorUnitarioCompra,int cantidadDisponible,double valorTotalComprado){   
+        this.valorUnitarioCompra=valorUnitarioCompra;
+        this.cantidadComprada=cantidadComprada;
+        this.cantidadDisponible=cantidadDisponible;
+        this.valorTotalComprado=valorTotalComprado;
+    }
+    
     public Producto getProducto() {
         return producto;
     }
@@ -30,20 +48,6 @@ public class Inventario {
      */
     public void setProducto(Producto producto) {
         this.producto = producto;
-    }
-
-    /**
-     * @return the valorUnitario
-     */
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    /**
-     * @param valorUnitario the valorUnitario to set
-     */
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
     }
 
     /**
@@ -114,6 +118,34 @@ public class Inventario {
      */
     public void setValorTotalVendido(double valorTotalVendido) {
         this.valorTotalVendido = valorTotalVendido;
+    }
+
+    /**
+     * @return the valorUnitarioCompra
+     */
+    public double getValorUnitarioCompra() {
+        return valorUnitarioCompra;
+    }
+
+    /**
+     * @param valorUnitarioCompra the valorUnitarioCompra to set
+     */
+    public void setValorUnitarioCompra(double valorUnitarioCompra) {
+        this.valorUnitarioCompra = valorUnitarioCompra;
+    }
+
+    /**
+     * @return the valorUnitarioVenta
+     */
+    public double getValorUnitarioVenta() {
+        return valorUnitarioVenta;
+    }
+
+    /**
+     * @param valorUnitarioVenta the valorUnitarioVenta to set
+     */
+    public void setValorUnitarioVenta(double valorUnitarioVenta) {
+        this.valorUnitarioVenta = valorUnitarioVenta;
     }
     
 }

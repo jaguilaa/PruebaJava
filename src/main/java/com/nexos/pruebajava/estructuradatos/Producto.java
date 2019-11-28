@@ -12,7 +12,15 @@ package com.nexos.pruebajava.estructuradatos;
 public class Producto {   
     
     private String nombreProducto;
-    private TipoProductoEnum tipoProducto;
+    private String tipoProducto;
+
+    public Producto() {
+    }
+    
+    public Producto(String nombreProducto, String tipoProducto){
+        this.nombreProducto=nombreProducto;
+        this.tipoProducto=tipoProducto;
+    }
     /**
      * @return the nombreProducto
      */
@@ -30,14 +38,14 @@ public class Producto {
     /**
      * @return the tipoProducto
      */
-    public TipoProductoEnum getTipoProducto() {
+    public String getTipoProducto() {
         return tipoProducto;
     }
 
     /**
      * @param tipoProducto the tipoProducto to set
      */
-    public void setTipoProducto(TipoProductoEnum tipoProducto) {
+    public void setTipoProducto(String tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
     

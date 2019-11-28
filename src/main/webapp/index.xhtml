@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -8,7 +10,8 @@
     </h:head>
  
     <h:body>
-        <center>Bienvenido a Hulk Store</center>
+        <center><h1 style="color: #2E96E7">Bienvenido a Hulk Store</h1></center><br/><br/><br/>
+        <p:outputLabel style="color: red">AVISO:Primero debe realizar una compra de un producto para agregar en el inventario y despues venderlo</p:outputLabel> <br/>
         <p:dataTable var="inventario" value="#{sessionScope['Inventarios']}">
             <p:column headerText="Nombre Producto">
                 <h:outputText value="#{inventario.producto.nombreProducto}" />
@@ -16,8 +19,11 @@
             <p:column headerText="Tipo Producto">
                 <h:outputText value="#{inventario.producto.tipoProducto}" />
             </p:column>
-            <p:column headerText="Valor Unitario">
-                <h:outputText value="#{inventario.valorUnitario}" />
+            <p:column headerText="Valor Unitario Compra">
+                <h:outputText value="#{inventario.valorUnitarioCompra}" />
+            </p:column>
+            <p:column headerText="Valor Unitario Venta">
+                <h:outputText value="#{inventario.valorUnitarioVenta}" />
             </p:column>
             <p:column headerText="Cantidades Vendidas">
                 <h:outputText value="#{inventario.cantidadVendida}" />
@@ -34,9 +40,12 @@
             <p:column headerText="Valor Total Vendido">
                 <h:outputText value="#{inventario.valorTotalVendido}" />
             </p:column>
-        </p:dataTable>
+        </p:dataTable><br/>
         <h:form>
-            <p:commandButton  action="faces/registrarCompraProducto.xhtml" value="Registrar Compra de Producto"/>
+            <div style="width: 100%;">
+                <div style="float:left;  width: 50%;"><p:commandButton  action="faces/registrarCompraProducto.xhtml" value="Registrar Compra de Producto"/></div>
+                <div style="float:right; width: 50%; text-align: right"><p:commandButton  action="faces/registrarVentaProducto.xhtml" value="Registrar Venta de Producto"/></div>
+            </div>
         </h:form>
     </h:body>
 </html>

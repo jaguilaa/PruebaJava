@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -6,10 +8,10 @@
         <title>Registrar Compra</title>
     </h:head>
     <h:body>
-        <center><h1>Registrar Compra Producto</h1></center><br/>
+        <center><h1 style="color: #2E96E7">Registrar Compra Producto</h1></center><br/>
         <div style="text-align: center;">
             <div style="display: inline-block; text-align: left;">
-                <h:form>           
+                <h:form id="compraProducto">           
                         <p:outputLabel>Nombre: </p:outputLabel> <p:inputText placeholder="Nombre Producto" value="#{compraProductoController.nombreProducto}"></p:inputText><br/>
                         <p:outputLabel>Tipo Producto: </p:outputLabel> <p:selectOneMenu placeholder="Tipo Producto" value="#{compraProductoController.tipoProducto}">
                             <f:selectItem itemLabel="Juguete" itemValue="JUGUETE" />
@@ -18,9 +20,12 @@
                             <f:selectItem itemLabel="Comic" itemValue="COMIC" />
                             <f:selectItem itemLabel="Accesorio" itemValue="ACCESORIO" />
                         </p:selectOneMenu><br/>
-                        <p:outputLabel>Valor Unitario: </p:outputLabel> <p:inputNumber placeholder="Valor Unitario" value="#{compraProductoController.valorUnitario}"></p:inputNumber><br/>
-                        <p:outputLabel>Cantidad Comprada: </p:outputLabel> <p:inputNumber placeholder="Cantidad Comprada" value="#{compraProductoController.cantidadComprada}"></p:inputNumber>
-                </h:form>
+                        <p:outputLabel>Valor Unitario: </p:outputLabel> <p:inputNumber placeholder="Valor Unitario" value="#{compraProductoController.valorUnitarioCompra}"></p:inputNumber><br/>
+                        <p:outputLabel>Cantidad Comprada: </p:outputLabel> <p:inputNumber placeholder="Cantidad Comprada" value="#{compraProductoController.cantidadComprada}"></p:inputNumber><br/><br/> 
+                        <p:growl id="growl" life="2000"/>
+                        <center><p:commandButton id="registrarCompraButton" update="growl" action="#{compraProductoController.registrarCompraProducto}" value="Registrar Compra" ></p:commandButton><br/>
+                        <p:commandButton  action="faces/index.xhtml" value="Regresar"/></center>
+                </h:form>  
             </div>
         </div>
     </h:body>
