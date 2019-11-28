@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+        <title>Inventario Hulk Store</title>
+    </h:head>
+ 
+    <h:body>
+        <center>Bienvenido a Hulk Store</center>
+        <p:dataTable var="inventario" value="#{sessionScope['Inventarios']}">
+            <p:column headerText="Nombre Producto">
+                <h:outputText value="#{inventario.producto.nombreProducto}" />
+            </p:column>
+            <p:column headerText="Tipo Producto">
+                <h:outputText value="#{inventario.producto.tipoProducto}" />
+            </p:column>
+            <p:column headerText="Valor Unitario">
+                <h:outputText value="#{inventario.valorUnitario}" />
+            </p:column>
+            <p:column headerText="Cantidades Vendidas">
+                <h:outputText value="#{inventario.cantidadVendida}" />
+            </p:column>
+            <p:column headerText="Cantidades Compradas">
+                <h:outputText value="#{inventario.cantidadComprada}" />
+            </p:column>
+            <p:column headerText="Cantidad Disponible">
+                <h:outputText value="#{inventario.cantidadDisponible}" />
+            </p:column>
+            <p:column headerText="Valor Total Comprado">
+                <h:outputText value="#{inventario.valorTotalComprado}" />
+            </p:column>
+            <p:column headerText="Valor Total Vendido">
+                <h:outputText value="#{inventario.valorTotalVendido}" />
+            </p:column>
+        </p:dataTable>
+        <h:form>
+            <p:commandButton  action="faces/registrarCompraProducto.xhtml" value="Registrar Compra de Producto"/>
+        </h:form>
+    </h:body>
+</html>
+
